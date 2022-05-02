@@ -7,11 +7,11 @@ $('.button-input').click(function () {
 
 // Проверка на попадание точки на график
 function checkResult(x, y, r) {
-    return  (x >= 0 && y >= 0 && y <= -x + r / 2) || //треугольник
+    return  (x >= 0 && y >= 0 && y <= -x + r) || //треугольник
         //прямоугольник
-        (x <= 0 && y <= 0 && x >= -r && y >= -r / 2) ||
+        (x <= 0 && y >= 0 && x >= -r / 2 && y <= r) ||
         //четверть круга
-        (x >= 0 && y <= 0 && x * x + y * y <= (r / 2) * (r / 2));
+        (x <= 0 && y <= 0 && x * x + y * y <= (r / 2) * (r / 2));
 }
 
 // Получаем значение R
@@ -27,8 +27,9 @@ function getRValue() {
 }
 
 function fixYField() {
-    $("input[name=\"newEntryForm:Y_field\"]").removeAttr("type")
-    $("input[name=\"newEntryForm:Y_field\"]").attr("type", "number")
+    let yField = $("input[name=\"newEntryForm:Y_field\"]")
+    yField.removeAttr("type")
+    yField.attr("type", "number")
 }
 
 // При нажатии на график выполнить функцию из graph.js
