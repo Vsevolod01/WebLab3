@@ -4,29 +4,29 @@ const DEFAULT_R_VALUE = 1;
 
 // Функции для вычисления Y и X
 
-function fromTableToSvgX(x){
+function fromTableToSvgX(x) {
     return x / getRValue() * CANVAS_R_VALUE + SVG_SIZE / 2;
 }
 
-function fromTableToSvgY(y){
+function fromTableToSvgY(y) {
     return SVG_SIZE / 2 - y / getRValue() * CANVAS_R_VALUE;
 }
 
-function fromSvgToRX(x){
+function fromSvgToRX(x) {
     return getRValue() * (x - SVG_SIZE / 2) / CANVAS_R_VALUE;
 }
 
-function fromSvgToRY(y){
+function fromSvgToRY(y) {
     return getRValue() * (SVG_SIZE / 2 - y) / CANVAS_R_VALUE;
 }
 
 
 // Рисует с таблицы точки
-function drawDotsFromTable(){
+function drawDotsFromTable() {
     deleteAllPointsFromPlot()
     setTimeout(() =>
 
-        $("tbody tr").each(function (){
+        $("tbody tr").each(function () {
             const point = $(this);
 
             const x = parseFloat(point.find("td:first-child").text());
@@ -49,12 +49,12 @@ function drawDotsFromTable(){
 }
 
 // Удаляет точки с графика
-function deleteAllPointsFromPlot(){
+function deleteAllPointsFromPlot() {
     $(".dot").remove();
 }
 
 // Нажатие на график и отправка формы
-function clickPlotHandler(e){
+function clickPlotHandler(e) {
     const offset = $(this).offset();
     const x = e.pageX - offset.left;
     const y = e.pageY - offset.top;
