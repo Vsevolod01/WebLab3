@@ -1,0 +1,45 @@
+.clock-container {
+    font-family: monospace;
+    font-size: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+#clock {
+    width: 240px;
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#myCanvas {
+    margin: 15px;
+}
+
+.link-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;}
+
+.link-button input[type="button"] {
+    font-family: monospace;
+    font-size: 16px;
+
+    width: 270px;
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    padding: 15px 0px 15px 0px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.link-button input[type="button"]:hover {
+    background-color: lightgray;
+}
