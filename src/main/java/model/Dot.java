@@ -1,63 +1,94 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+//TODO: check with lombok getter/setters
+//import lombok.*;
+//
+//@Getter
+//@Setter
+//@NoArgsConstructor
+@Entity(name = "DOT_TABLE")
 public class Dot {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "ID")
+    private int id;
 
-    private Double x;
-    private Double y;
-    private Integer r;
-    private String atArea;
+    @Column(name = "X")
+    private double x;
 
-    public Double getX() {
+    @Column(name = "Y")
+    private double y;
+
+    @Column(name = "R")
+    private double r;
+
+    @Column(name = "RESULT")
+    private boolean result;
+
+    @Column(name = "DATE")
+    private String date;
+
+    public Dot() {
+    }
+
+    public Dot(double x, double y, double r, boolean result, String date) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.result = result;
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public Double getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public Integer getR() {
+    public double getR() {
         return r;
     }
 
-    public void setR(Integer r) {
+    public void setR(double r) {
         this.r = r;
     }
 
-    public String getAtArea() {
-        return atArea;
+    public boolean isResult() {
+        return result;
     }
 
-    public void setAtArea(String atArea) {
-        this.atArea = atArea;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 
-    public String getCurrentTime() {
-        return currentTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setCurrentTime(String currentTime) {
-        this.currentTime = currentTime;
+    public void setDate(String date) {
+        this.date = date;
     }
-
-    private String currentTime;
-
-    public Dot(double x, double y, Integer r, String hit){
-        this.atArea = hit;
-        this.x = x;
-        this.y = y;
-        this.r = r;
-    }
-
-    public Dot() {
-
-    }
-
 }

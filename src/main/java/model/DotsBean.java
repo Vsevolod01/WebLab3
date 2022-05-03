@@ -1,105 +1,72 @@
 package model;
 
-import utils.DBManager;
-import lombok.*;
-import views.AreaResult;
 
-import javax.annotation.ManagedBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
-
 import javax.faces.event.ActionEvent;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ManagedBean
+@ManagedBean(name = "dotsBean", eager = true)
 @ApplicationScoped
 public class DotsBean {
-    Dot dotForExecution = new Dot(); //точка для отправки
-    Dot dotFromSVG = new Dot(); //точка из графика
 
-    DBManager dbManager = new DBManager();
+    private Dot dot;
+    private ArrayList<Dot> dots;
 
-    //Загрузка коллекции из БД
-    private List<Dot> dotsList = dbManager.getPoints();
 
-    //Добавляет точку в коллекцию из формы.
-    public void addPoint() {
-        Dot currentDot = new Dot();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        currentDot.setCurrentTime(dateFormat.format(new Date(System.currentTimeMillis())));
-        //Проверка R
-        try {
-            if (dotForExecution.getR() >= 0 && dotForExecution.getR() != null) {
-                currentDot.setR(dotForExecution.getR());
-            } else {
-//                views.ErrorPage.goToErrorPage("Wrong R");
-                return;
-            }
-        } catch (Exception e) {
-//            views.ErrorPage.goToErrorPage("Wrong R");
-            return;
-        }
-        //Проверка X
-        try {
-            if (dotForExecution.getX() != null) {
-                currentDot.setX(dotForExecution.getX());
-            } else {
-//                views.ErrorPage.goToErrorPage("Wrong X");
-                return;
-            }
-        } catch (Exception e) {
-//            views.ErrorPage.goToErrorPage("Wrong X");
-            return;
-        }
-        //Проверка Y
-        try {
-            if (dotForExecution.getY() != null && dotForExecution.getY() >= -3 && dotForExecution.getY() <= 3) {
-                currentDot.setY(dotForExecution.getY());
-            } else {
-//                views.ErrorPage.goToErrorPage("Wrong Y");
-                return;
-            }
-        } catch (Exception e) {
-//            views.ErrorPage.goToErrorPage("Wrong Y");
-            return;
-        }
+    SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    Session session = factory.openSession();
 
-        currentDot.setAtArea(AreaResult.isItInArea(currentDot) ? "Попадание" : "Промах");
-        if (dbManager.addPoint(currentDot)) {
-            dotsList.add(currentDot);
-        }
+    public void addDot() {
+        Transaction transaction = session.beginTransaction();
+        session.save(dot);
+        transaction.commit();
     }
 
-    //Добавляет точку в коллекцию и бд из графика.
-    public void addDotFromSvg() {
-        Dot currentDot = new Dot();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        currentDot.setCurrentTime(dateFormat.format(new Date(System.currentTimeMillis())));
-        currentDot.setR(dotFromSVG.getR());
-        currentDot.setX(dotFromSVG.getX());
-        currentDot.setY(dotFromSVG.getY());
-        currentDot.setAtArea(AreaResult.isItInArea(dotFromSVG) ? "Попадание" : "Промах");
-        if (dbManager.addPoint(currentDot)) {
-            dotsList.add(currentDot);
-        }
-    }
 
     public void clearTable(){
-        dbManager.clearTable();
-        dotsList.clear();
+        String stringQuery = "DELETE FROM DOT_TABLE";
+        Query query = session.createQuery(stringQuery);
+        query.executeUpdate();
     }
-    //Получение X
-    public void toggle(ActionEvent event) {
+
+    public Dot getDot() {
+        return dot;
+    }
+
+    public void setDot(Dot dot) {
+        this.dot = dot;
+    }
+
+    public ArrayList<Dot> getDots() {
+//        Query query = session.createQuery("from DOT_TABLE");
+//        return query.getResultList();
+        return (ArrayList<Dot>) session.createQuery("from DOT_TABLE").list();
+    }
+
+    public void setDots(ArrayList<Dot> dots) {
+        this.dots = dots;
+    }
+
+    public void toggleX(ActionEvent event) {
         UIComponent component = event.getComponent();
         System.out.print(component.getAttributes());
         String value = (String) component.getAttributes().get("value");
-        dotForExecution.setX(Double.parseDouble(value));
+        dot.setX(Double.parseDouble(value));
     }
 }
