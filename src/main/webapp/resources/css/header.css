@@ -1,15 +1,11 @@
-header {
-    font-family: monospace;
-}
 .header_content {
     font-family: monospace;
-
     width: 100%;
     height: 10%;
 
-    margin-top: 12px;
-    padding-bottom: 12px;
-    /* margin-bottom: 36px; */
+    margin-top: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 36px;
 
     display: flex;
     justify-content: space-evenly;

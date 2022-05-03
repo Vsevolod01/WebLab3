@@ -4,21 +4,14 @@ package model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 @ManagedBean(name = "dotsBean", eager = true)
@@ -39,7 +32,7 @@ public class DotsBean {
     }
 
 
-    public void clearTable(){
+    public void clearTable() {
         String stringQuery = "DELETE FROM DOT_TABLE";
         Query query = session.createQuery(stringQuery);
         query.executeUpdate();
@@ -54,9 +47,9 @@ public class DotsBean {
     }
 
     public ArrayList<Dot> getDots() {
-//        Query query = session.createQuery("from DOT_TABLE");
-//        return query.getResultList();
-        return (ArrayList<Dot>) session.createQuery("from DOT_TABLE").list();
+        Query query = session.createQuery("from DOT_TABLE");
+        return (ArrayList<Dot>) query.getResultList();
+//        return (ArrayList<Dot>) session.createQuery("from DOT_TABLE").list();
     }
 
     public void setDots(ArrayList<Dot> dots) {
@@ -67,6 +60,13 @@ public class DotsBean {
         UIComponent component = event.getComponent();
         System.out.print(component.getAttributes());
         String value = (String) component.getAttributes().get("value");
-        dot.setX(Double.parseDouble(value));
+        dot.setX(Integer.parseInt(value));
+    }
+
+    public void toggleR(ActionEvent event) {
+        UIComponent component = event.getComponent();
+        System.out.print(component.getAttributes());
+        String value = (String) component.getAttributes().get("value");
+        dot.setR(Double.parseDouble(value));
     }
 }

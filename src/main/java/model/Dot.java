@@ -30,7 +30,7 @@ public class Dot {
     @Column(name = "RESULT")
     private boolean result;
 
-    @Column(name = "DATE")
+    @Column(name = "LAIKAS")
     private String date;
 
     public Dot() {
