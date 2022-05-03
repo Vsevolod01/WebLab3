@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="0ed3a968-9671-41c6-ba8d-588ffd709f90">
-      <driver-ref>oracle.19</driver-ref>
+    <data-source source="LOCAL" name="@localhost" uuid="40db3c40-09b3-4b75-9629-1a595657650e">
+      <driver-ref>oracle</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-driver>oracle.jdbc.driver.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:orbis</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="a6e5bd0f-945d-4938-a79a-f5baab351c51">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/elopa/Desktop/Labs (old)/Academ/Web-Programming/Lab3/src/main/resources/hibernate.cfg.xml</remarks>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.driver.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@localhost:1521:orbis</jdbc-url>
     </data-source>
   </component>
 </project>

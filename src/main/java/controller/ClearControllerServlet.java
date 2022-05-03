@@ -17,8 +17,4 @@ public class ClearControllerServlet extends HttpServlet {
         session.setAttribute("responses", new ArrayList<>());
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
 }

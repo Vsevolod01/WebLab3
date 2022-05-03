@@ -19,8 +19,4 @@ public class ControllerServlet extends HttpServlet {
             req.getRequestDispatcher("/areaCheck").forward(req, resp);
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-    }
 }

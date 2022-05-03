@@ -69,7 +69,7 @@ public class AreaCheckServlet extends HttpServlet {
                 //четверть круга
                 (x <= 0 && y <= 0 && x * x + y * y <= (R / 2) * (R / 2));
 
-        Dot dot = new Dot(x, y, (int) (double) R, hit ? "Попадание" : "Промах");
+        Dot dot = new Dot(x, y, (double) R, hit, "fuf");
 
         Calendar calendar = Calendar.getInstance();
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
@@ -88,11 +88,5 @@ public class AreaCheckServlet extends HttpServlet {
         Gson gson = new Gson();
         String JSONResponse = gson.toJson(response);
         resp.getWriter().print(JSONResponse);
-    }
-
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-
     }
 }

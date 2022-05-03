@@ -35,11 +35,11 @@
 
                 <div class="text-center">
                     <h:form id="hiddenForm" style="display: none">
-                        <h:inputText styleClass="pointX" value="#{dotsBean.dotFromSVG.x}"/>
-                        <h:inputText styleClass="pointY" value="#{dotsBean.dotFromSVG.y}"/>
-                        <h:inputText styleClass="pointR" value="#{dotsBean.dotFromSVG.r}"/>
+                        <h:inputText styleClass="pointX" value="#{dotsBean.dot.x}"/>
+                        <h:inputText styleClass="pointY" value="#{dotsBean.dot.y}"/>
+                        <h:inputText styleClass="pointR" value="#{dotsBean.dot.r}"/>
                         <h:inputHidden type="hidden" id="isFromGraphic"/>
-                        <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDotFromSvg}">
+                        <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDot}">
                             <f:ajax execute="hiddenForm" render="valuesTable"/>
                         </h:commandButton>
                     </h:form>
@@ -54,7 +54,7 @@
                                     <div class="text-center">
                                         <p:spinner id="R_field"
                                                    name="r"
-                                                   value="#{dotsBean.dotForExecution.r}"
+                                                   value="#{dotsBean.dot.r}"
                                                    required="true"
                                                    min="1"
                                                    max="3"
@@ -66,27 +66,27 @@
 
                             <p>Х:</p>
                             <div class="text-center">
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="-5" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="-4" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="-3" name="x"/>
                             </div>
                             <div class="text-center">
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="-2" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="-1" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="0" name="x"/>
                             </div>
                             <div class="text-center">
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="1" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="2" name="x"/>
-                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggle}"
+                                <p:commandLink type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
                                                value="3" name="x"/>
                             </div>
 
@@ -95,7 +95,7 @@
                             </p>
                             <div class="row">
                                 <label class="text-label">
-                                    <h:inputText value="#{dotsBean.dotForExecution.y}"
+                                    <h:inputText value="#{dotsBean.dot.y}"
                                                  id="Y_field"
                                                  class="text-input"
                                                  name="y"
@@ -108,7 +108,7 @@
                             <h:commandButton id="submit-button"
                                              disabled="false"
                                              type="submit"
-                                             action="#{dotsBean.addPoint}"
+                                             action="#{dotsBean.addDot}"
                                              value="Отправить"
                                              onclick="drawDotsFromTable()">
                                 <f:ajax execute="newEntryForm" render="valuesTable"/>
@@ -135,7 +135,7 @@
                 <!--                    <div class="table">-->
                 <div class="text-center">
                     <h:panelGroup id="valuesTable">
-                        <h:dataTable styleClass="table-check" value="#{dotsBean.dotsList}" var="dot">
+                        <h:dataTable styleClass="table-check" value="#{dotsBean.dots}" var="dot">
                             <h:column>
                                 <f:facet name="header">X</f:facet>
                                 #{dot.x}
@@ -150,12 +150,12 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Текущее время</f:facet>
-                                #{dot.currentTime}
+                                #{dot.date}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Результат</f:facet>
-                                <h:outputText value="#{dot.atArea}"
-                                              styleClass="#{(dot.atArea=='Промах') ? 'red' : 'green'}"/>
+                                <h:outputText value="#{dot.result}"
+                                              styleClass="#{dot.result ? 'red' : 'green'}"/>
                             </h:column>
                         </h:dataTable>
                     </h:panelGroup>
