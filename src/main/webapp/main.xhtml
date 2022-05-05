@@ -71,7 +71,7 @@
                              placeholder="[-5; 5]"/>
             </div>
             <div class="selector">
-                <label class="selector-description">Choose X value:</label>
+                <label class="selector-description">Choose R value:</label>
                 <div class="checkbox-with-label">
                     <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
                                      value="1" name="r"/>
@@ -132,8 +132,8 @@
         </h:column>
         <h:column>
             <f:facet name="header">Результат</f:facet>
-            <h:outputText value="#{dot.result}"
-                          styleClass="#{(dot.result) ? 'red' : 'green'}"/>
+            <h:outputText value="#{dot.result}"/>
+<!--                          styleClass="#{(dot.result) ? 'red' : 'green'}"/>-->
         </h:column>
         <h:column>
             <f:facet name="header">Текущее время</f:facet>
