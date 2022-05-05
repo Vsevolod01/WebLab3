@@ -35,7 +35,7 @@ function drawDotsFromTable() {
 
             const color = checkResult(x, y, getRValue()) ? 'green' : 'red';
 
-            const plot = $(".svg-wrapper svg");
+            const plot = $(".svg-container svg");
 
             const existingContent = plot.html();
             const contentToInsert = `<circle class="dot" 
@@ -69,6 +69,7 @@ function clickPlotHandler(e) {
     $(".pointX").val(xValue.toFixed(2));
     $(".pointY").val(yValue.toFixed(2));
     $(".pointR").val(rValue);
+    $(".pointResult").val(checkResult(xValue, yValue, rValue));
     $(".submitSvg").click();
 
     drawDotsFromTable();

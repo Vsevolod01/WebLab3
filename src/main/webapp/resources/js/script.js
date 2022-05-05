@@ -33,7 +33,7 @@ function fixYField() {
 }
 
 // При нажатии на график выполнить функцию из graph.js
-$(".svg-wrapper svg").click(clickPlotHandler);
+$(".svg-container svg").click(clickPlotHandler);
 
 // Перерисовка графика по изменению R
 $("input[name=\"newEntryForm:R_field_input\"]").change(function () {

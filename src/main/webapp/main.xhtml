@@ -20,6 +20,16 @@
 
 <h:body>
     <ui:include src="templates/header.html"/>
+    <h:form id="hiddenForm" style="display: none">
+        <h:inputText styleClass="pointX" value="#{dotsBean.dot.x}"/>
+        <h:inputText styleClass="pointY" value="#{dotsBean.dot.y}"/>
+        <h:inputText styleClass="pointR" value="#{dotsBean.dot.r}"/>
+        <h:inputText styleClass="pointResult" value="#{dotsBean.dot.result}"/>
+        <h:inputHidden type="hidden" id="isFromGraphic"/>
+        <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDotFromSvg}">
+            <f:ajax execute="hiddenForm" render="valuesTable"/>
+        </h:commandButton>
+    </h:form>
     <h:form id="newEntryForm">
         <div class="selectors">
             <div class="selector">
@@ -63,7 +73,7 @@
             </div>
             <div class="selector">
                 <div class="selector-description">Choose Y value:</div>
-                <h:inputText value="#{dotsBean.dot.y}"
+                <p:inputText value="#{dotsBean.dot.y}"
                              id="Y_field"
                              class="text-input"
                              name="y"

@@ -6,12 +6,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import views.AreaResult;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 import javax.persistence.*;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,9 +39,16 @@ public class DotsBean {
         em.getTransaction().begin();
         em.persist(dot);
         em.getTransaction().commit();
-
     }
 
+    public void addDotFromSvg() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
+        dot.setResult(AreaResult.isItInArea(dot));
+        em.getTransaction().begin();
+        em.persist(dot);
+        em.getTransaction().commit();
+    }
 
     public void clearTable() {
         Transaction transaction = session.beginTransaction();
@@ -68,7 +77,7 @@ public class DotsBean {
 
     public void toggleX(ActionEvent event) {
         UIComponent component = event.getComponent();
-        System.out.print(component.getAttributes());
+        System.out.print(component.getAttributes() + "Fuck");
         String value = (String) component.getAttributes().get("value");
         dot.setX(Integer.parseInt(value));
     }
