@@ -20,7 +20,7 @@
 
 <h:body>
     <ui:include src="templates/header.html"/>
-    <h:form>
+    <h:form id="newEntryForm">
         <div class="selectors">
             <div class="selector">
                 <label class="selector-description">Choose X value:</label>
@@ -108,7 +108,7 @@
                              type="submit"
                              action="#{dotsBean.clearTable()}"
                              value="Очистить таблицу"
-                             onclick="drawDotsFromTable(); drawDotsFromTable()">
+                             onclick="clearTable()">
                 <f:ajax execute="newEntryForm" render="valuesTable"/>
             </h:commandButton>
             <h:button class="submit" outcome="index" value="Посмотреть на часы"/>
@@ -117,29 +117,31 @@
             <ui:include src="templates/graph.html"/>
         </div>
     </h:form>
-    <h:dataTable class="results" id="results" value="#{dotsBean.dots}" var="dot">
-        <h:column>
-            <f:facet name="header">X</f:facet>
-            #{dot.x}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Y</f:facet>
-            #{dot.y}
-        </h:column>
-        <h:column>
-            <f:facet name="header">R</f:facet>
-            #{dot.r}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Результат</f:facet>
-            <h:outputText value="#{dot.result}"/>
-<!--                          styleClass="#{(dot.result) ? 'red' : 'green'}"/>-->
-        </h:column>
-        <h:column>
-            <f:facet name="header">Текущее время</f:facet>
-            #{dot.date}
-        </h:column>
-    </h:dataTable>
+    <h:panelGroup>
+        <h:dataTable class="results" id="results" value="#{dotsBean.dots}" var="dot">
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{dot.x}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{dot.y}
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{dot.r}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Результат</f:facet>
+                <h:outputText value="#{dot.result}"
+                              styleClass="#{(dot.result) ? 'green' : 'red'}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Текущее время</f:facet>
+                #{dot.date}
+            </h:column>
+        </h:dataTable>
+    </h:panelGroup>
     <ui:insert name="scripts">
         <h:outputScript library="js" name="graph.js"/>
         <h:outputScript library="js" name="script.js"/>

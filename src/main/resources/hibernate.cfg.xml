@@ -6,8 +6,8 @@
     <session-factory>
         <property name="connection.url">jdbc:oracle:thin:@localhost:1521:orbis</property>
         <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-        <property name="connection.username">s312711</property>
-        <property name="connection.password">msc114</property>
+        <property name="connection.username">s285641</property>
+        <property name="connection.password">pln913</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
         <property name="show_sql">true</property>
 <!--        <property name="hibernate.hbm2ddl.auto">create-drop</property>-->

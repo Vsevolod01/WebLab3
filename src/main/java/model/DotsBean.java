@@ -11,31 +11,42 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
+import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 @ManagedBean(name = "dotsBean", eager = true)
 @ApplicationScoped
 public class DotsBean {
 
-    private Dot dot;
-    private ArrayList<Dot> dots;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
+    EntityManager em = emf.createEntityManager();
+
+    private Dot dot = new Dot();
+    private ArrayList<Dot> dots = new ArrayList<>();
 
 
     SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
     Session session = factory.openSession();
 
     public void addDot() {
-        Transaction transaction = session.beginTransaction();
-        session.save(dot);
-        transaction.commit();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
+        em.getTransaction().begin();
+        em.persist(dot);
+        em.getTransaction().commit();
+
     }
 
 
     public void clearTable() {
-        String stringQuery = "DELETE FROM DOT_TABLE";
+        Transaction transaction = session.beginTransaction();
+        String stringQuery = "DELETE FROM Dot";
         Query query = session.createQuery(stringQuery);
         query.executeUpdate();
+        transaction.commit();
     }
 
     public Dot getDot() {
@@ -47,9 +58,8 @@ public class DotsBean {
     }
 
     public ArrayList<Dot> getDots() {
-        Query query = session.createQuery("from DOT_TABLE");
+        Query query = session.createQuery("from Dot");
         return (ArrayList<Dot>) query.getResultList();
-//        return (ArrayList<Dot>) session.createQuery("from DOT_TABLE").list();
     }
 
     public void setDots(ArrayList<Dot> dots) {

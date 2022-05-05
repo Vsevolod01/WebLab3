@@ -3,6 +3,7 @@ package model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 //TODO: check with lombok getter/setters
 //import lombok.*;
@@ -10,11 +11,12 @@ import javax.persistence.*;
 //@Getter
 //@Setter
 //@NoArgsConstructor
-@Entity(name = "DOT_TABLE")
-public class Dot {
+@Entity
+@Table(name="DOT_TABLE")
+public class Dot implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "native")
+    @SequenceGenerator(name = "native", sequenceName = "native", allocationSize = 1)
     @Column(name = "ID")
     private int id;
 

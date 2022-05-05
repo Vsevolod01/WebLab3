@@ -24,7 +24,6 @@ function fromSvgToRY(y) {
 // Рисует с таблицы точки
 function drawDotsFromTable() {
     deleteAllPointsFromPlot()
-    setTimeout(() =>
 
         $("tbody tr").each(function () {
             const point = $(this);
@@ -45,7 +44,11 @@ function drawDotsFromTable() {
                                          cy="${fromTableToSvgY(y)}" 
                                          fill="${color}"/>`;
             plot.html(existingContent + contentToInsert);
-        }), 500);
+        })
+}
+
+function clearTable() {
+    $("tbody tr").remove();
 }
 
 // Удаляет точки с графика

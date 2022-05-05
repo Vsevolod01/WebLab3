@@ -5,10 +5,11 @@
              version="2.2">
     <persistence-unit name="hibernate">
         <jta-data-source>java:/OracleDS</jta-data-source>
+        <class>model.Dot</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:orbis"/>
-            <property name="javax.persistence.jdbc.user" value="s312711"/>
-            <property name="javax.persistence.jdbc.password" value="msc114"/>
+            <property name="javax.persistence.jdbc.user" value="s285641"/>
+            <property name="javax.persistence.jdbc.password" value="pln913"/>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
         </properties>

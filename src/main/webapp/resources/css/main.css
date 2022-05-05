@@ -38,3 +38,13 @@ body {
     margin: 1px;
     display: inline-block;
 }
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+.green {
+    color: green;
+    font-weight: bold;
+}
