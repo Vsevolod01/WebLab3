@@ -23,28 +23,31 @@ function fromSvgToRY(y) {
 
 // Рисует с таблицы точки
 function drawDotsFromTable() {
-    deleteAllPointsFromPlot()
+    clearPlot();
+    let count = 0;
+    $("tbody tr").each(function () {
+        let point = $(this);
 
-        $("tbody tr").each(function () {
-            const point = $(this);
+        let x = parseFloat(point.find("td:first-child").text());
+        let y = parseFloat(point.find("td:nth-child(2)").text());
 
-            const x = parseFloat(point.find("td:first-child").text());
-            const y = parseFloat(point.find("td:nth-child(2)").text());
+        if (isNaN(x) || isNaN(y)) return;
 
-            if (isNaN(x) || isNaN(y)) return;
+        let color = checkResult(x, y, getRValue()) ? 'green' : 'red';
 
-            const color = checkResult(x, y, getRValue()) ? 'green' : 'red';
+        let plot = $(".svg-container svg");
 
-            const plot = $(".svg-container svg");
-
-            const existingContent = plot.html();
-            const contentToInsert = `<circle class="dot" 
+        let existingContent = plot.html();
+        let contentToInsert = `<circle class="dot" 
                                          r="4" 
                                          cx="${fromTableToSvgX(x)}" 
                                          cy="${fromTableToSvgY(y)}" 
                                          fill="${color}"/>`;
-            plot.html(existingContent + contentToInsert);
-        })
+        plot.html(existingContent + contentToInsert);
+        count++;
+    })
+    console.log(count);
+
 }
 
 function clearTable() {
@@ -52,8 +55,23 @@ function clearTable() {
 }
 
 // Удаляет точки с графика
-function deleteAllPointsFromPlot() {
+function clearPlot() {
     $(".dot").remove();
+}
+
+function drawDot() {
+    let x = $('.pointX').val();
+    let y = $('.pointY').val();
+    let color = checkResult(x, y, getRValue()) ? 'green' : 'red';
+
+    let plot = $(".svg-container svg");
+    let existingContent = plot.html();
+    let contentToInsert = `<circle class="dot" 
+                                         r="4" 
+                                         cx="${fromTableToSvgX(x)}" 
+                                         cy="${fromTableToSvgY(y)}" 
+                                         fill="${color}"/>`;
+    plot.html(existingContent + contentToInsert);
 }
 
 // Нажатие на график и отправка формы

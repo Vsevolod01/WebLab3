@@ -37,7 +37,7 @@ $(".svg-container svg").click(clickPlotHandler);
 
 // Перерисовка графика по изменению R
 $("input[name=\"newEntryForm:R_field_input\"]").change(function () {
-    deleteAllPointsFromPlot();
+    clearPlot();
     drawDotsFromTable();
 })
 

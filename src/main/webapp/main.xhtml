@@ -26,8 +26,8 @@
         <h:inputText styleClass="pointR" value="#{dotsBean.dot.r}"/>
         <h:inputText styleClass="pointResult" value="#{dotsBean.dot.result}"/>
         <h:inputHidden type="hidden" id="isFromGraphic"/>
-        <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDotFromSvg}">
-            <f:ajax execute="hiddenForm" render="valuesTable"/>
+        <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDot}">
+            <f:ajax execute="hiddenForm" render="valuesTable" onevent="drawDot()"/>
         </h:commandButton>
     </h:form>
     <h:form id="newEntryForm">
@@ -108,9 +108,9 @@
                              disabled="false"
                              type="submit"
                              action="#{dotsBean.addDot}"
-                             value="Отправить"
-                             onclick="drawDotsFromTable()">
-                <f:ajax execute="newEntryForm" render="valuesTable"/>
+                             value="Отправить">
+<!--                             onclick="drawDotsFromTable()">-->
+                <f:ajax execute="newEntryForm" render="valuesTable" onevent="drawDotsFromTable()"/>
             </h:commandButton>
             <h:commandButton id="clear-button"
                              class="submit"
@@ -118,7 +118,7 @@
                              type="submit"
                              action="#{dotsBean.clearTable()}"
                              value="Очистить таблицу"
-                             onclick="clearTable()">
+                             onclick="clearTable(); clearPlot()">
                 <f:ajax execute="newEntryForm" render="valuesTable"/>
             </h:commandButton>
             <h:button class="submit" outcome="index" value="Посмотреть на часы"/>
@@ -127,7 +127,7 @@
             <ui:include src="templates/graph.html"/>
         </div>
     </h:form>
-    <h:panelGroup>
+    <h:panelGroup id="valuesTable">
         <h:dataTable class="results" id="results" value="#{dotsBean.dots}" var="dot">
             <h:column>
                 <f:facet name="header">X</f:facet>
