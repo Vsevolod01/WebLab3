@@ -24,7 +24,6 @@ function fromSvgToRY(y) {
 // Рисует с таблицы точки
 function drawDotsFromTable() {
     clearPlot();
-    let count = 0;
     $("tbody tr").each(function () {
         let point = $(this);
 
@@ -44,10 +43,7 @@ function drawDotsFromTable() {
                                          cy="${fromTableToSvgY(y)}" 
                                          fill="${color}"/>`;
         plot.html(existingContent + contentToInsert);
-        count++;
     })
-    console.log(count);
-
 }
 
 function clearTable() {
@@ -91,4 +87,11 @@ function clickPlotHandler(e) {
     $(".submitSvg").click();
 
     drawDotsFromTable();
+}
+
+function myFunc(data) {
+    if (data.status == "success") {
+        // drawDot();
+        drawDotsFromTable()
+    }
 }

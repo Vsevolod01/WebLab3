@@ -27,7 +27,8 @@
         <h:inputText styleClass="pointResult" value="#{dotsBean.dot.result}"/>
         <h:inputHidden type="hidden" id="isFromGraphic"/>
         <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDot}">
-            <f:ajax execute="hiddenForm" render="valuesTable" onevent="drawDot()"/>
+            <f:ajax execute="hiddenForm" render="valuesTable"
+                    onevent="myFunc" />
         </h:commandButton>
     </h:form>
     <h:form id="newEntryForm">
@@ -84,7 +85,7 @@
                 <label class="selector-description">Choose R value:</label>
                 <div class="checkbox-with-label">
                     <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
-                                     value="1" name="r"/>
+                                     value="1" name="r" process="@this" />
                 </div>
                 <div class="checkbox-with-label">
                     <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
@@ -110,7 +111,7 @@
                              action="#{dotsBean.addDot}"
                              value="Отправить">
 <!--                             onclick="drawDotsFromTable()">-->
-                <f:ajax execute="newEntryForm" render="valuesTable" onevent="drawDotsFromTable()"/>
+                <f:ajax execute="newEntryForm" render="valuesTable" onevent="myFunc"/>
             </h:commandButton>
             <h:commandButton id="clear-button"
                              class="submit"

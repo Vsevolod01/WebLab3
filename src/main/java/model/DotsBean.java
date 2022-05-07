@@ -29,6 +29,7 @@ public class DotsBean {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
     EntityManager em = emf.createEntityManager();
 
+    //TODO - надо убрать
     SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 
