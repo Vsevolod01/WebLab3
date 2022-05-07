@@ -8,14 +8,16 @@ import org.hibernate.query.Query;
 import views.AreaResult;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.event.ActionEvent;
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.transaction.SystemException;
+import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,8 +28,14 @@ import java.util.List;
 @ApplicationScoped
 public class DotsBean {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
-    EntityManager em = emf.createEntityManager();
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
+//    EntityManager em = emf.createEntityManager();
+    @Resource
+    private UserTransaction transaction;
+
+    @PersistenceContext(unitName = "hibernate")
+    EntityManager em;
+
 
     //TODO - надо убрать
     SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
@@ -38,21 +46,32 @@ public class DotsBean {
 
     @PostConstruct
     public void init() {
-        Session session = factory.openSession();
-        Query query = session.createQuery("from Dot");
-        dots = (ArrayList<Dot>) query.getResultList();
-        session.close();
+//        Session session = factory.openSession();
+//        Query query = session.createQuery("from Dot");
+//        dots = (ArrayList<Dot>) query.getResultList();
+//        session.close();
+        dots = em.createQuery("from Dot").getResultList();
     }
 
     public void addDot() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
-        dot.setResult(AreaResult.isItInArea(dot));
-        em.getTransaction().begin();
-        em.persist(dot);
-        em.getTransaction().commit();
-        dots.add(dot);
-        System.out.println("addDot()");
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+            dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
+            dot.setResult(AreaResult.isItInArea(dot));
+            transaction.begin();
+            em.persist(dot);
+            transaction.commit();
+            dots.add(dot);
+            System.out.println("addDot()");
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                transaction.rollback();
+            } catch (SystemException systemException) {
+                systemException.printStackTrace();
+            }
+        }
+
     }
 
     public void addDotFromSvg() {
