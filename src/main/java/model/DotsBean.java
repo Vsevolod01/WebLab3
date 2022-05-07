@@ -2,7 +2,6 @@ package model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import views.AreaResult;
@@ -11,11 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIComponent;
-import javax.faces.event.ActionEvent;
 import javax.persistence.*;
 import javax.transaction.SystemException;
-import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import java.text.SimpleDateFormat;
@@ -28,8 +24,6 @@ import java.util.List;
 @ApplicationScoped
 public class DotsBean {
 
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
-//    EntityManager em = emf.createEntityManager();
     @Resource
     private UserTransaction transaction;
 
@@ -38,7 +32,7 @@ public class DotsBean {
 
 
     //TODO - надо убрать
-    SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    static SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 
     private Dot dot = new Dot();
@@ -46,11 +40,10 @@ public class DotsBean {
 
     @PostConstruct
     public void init() {
-//        Session session = factory.openSession();
-//        Query query = session.createQuery("from Dot");
-//        dots = (ArrayList<Dot>) query.getResultList();
-//        session.close();
-        dots = em.createQuery("from Dot").getResultList();
+        Session session = factory.openSession();
+        Query query = session.createQuery("from Dot");
+        dots = (ArrayList<Dot>) query.getResultList();
+        session.close();
     }
 
     public void addDot() {
@@ -74,25 +67,18 @@ public class DotsBean {
 
     }
 
-    public void addDotFromSvg() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
-        dot.setResult(AreaResult.isItInArea(dot));
-        em.getTransaction().begin();
-        em.persist(dot);
-        em.getTransaction().commit();
-    }
-
     public void clearTable() {
-        Session session = factory.openSession();
-        Transaction transaction = session.beginTransaction();
-        String stringQuery = "DELETE FROM Dot";
-        Query query = session.createQuery(stringQuery);
-        query.executeUpdate();
-        transaction.commit();
-        System.out.println("clearTable()");
-        session.close();
-        dots.clear();
+        try {
+            transaction.begin();
+            String stringQuery = "DELETE FROM Dot";
+            em.createQuery(stringQuery).executeUpdate();
+            transaction.commit();
+            System.out.println("clearTable()");
+
+            dots.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Dot getDot() {
@@ -111,17 +97,4 @@ public class DotsBean {
         this.dots = dots;
     }
 
-    public void toggleX(ActionEvent event) {
-        UIComponent component = event.getComponent();
-        System.out.print(component.getAttributes());
-        String value = (String) component.getAttributes().get("value");
-        dot.setX(Integer.parseInt(value));
-    }
-
-    public void toggleR(ActionEvent event) {
-        UIComponent component = event.getComponent();
-        System.out.print(component.getAttributes());
-        String value = (String) component.getAttributes().get("value");
-        dot.setR(Double.parseDouble(value));
-    }
 }

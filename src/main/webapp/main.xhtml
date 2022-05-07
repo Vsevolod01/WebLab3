@@ -35,7 +35,7 @@
         <div class="selectors">
             <div class="selector">
                 <label class="selector-description">Choose X value:</label>
-                <p:inputText id="x-label" value="#{dotsBean.dot.x}"/>
+                <p:inputText id="x-label" value="#{dotsBean.dot.x}" style="display: none"/>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
                                      action="#{dotsBean.dot.setX(-5)}"
@@ -93,7 +93,7 @@
             </div>
             <div class="selector">
                 <label class="selector-description">Choose R value:</label>
-                <p:inputText id="r-label" value="#{dotsBean.dot.r}"/>
+                <p:inputText id="r-label" value="#{dotsBean.dot.r}" style="display: none"/>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
                                      action="#{dotsBean.dot.setR(1)}"
