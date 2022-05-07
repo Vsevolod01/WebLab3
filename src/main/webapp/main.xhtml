@@ -35,40 +35,50 @@
         <div class="selectors">
             <div class="selector">
                 <label class="selector-description">Choose X value:</label>
+                <p:inputText id="x-label" value="#{dotsBean.dot.x}"/>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(-5)}"
                                      value="-5" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(-4)}"
                                      value="-4" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(-3)}"
                                      value="-3" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(-2)}"
                                      value="-2" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(-1)}"
                                      value="-1" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(0)}"
                                      value="0" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(1)}"
                                      value="1" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(2)}"
                                      value="2" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleX}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                                     action="#{dotsBean.dot.setX(3)}"
                                      value="3" name="x"/>
                 </div>
             </div>
@@ -83,24 +93,30 @@
             </div>
             <div class="selector">
                 <label class="selector-description">Choose R value:</label>
+                <p:inputText id="r-label" value="#{dotsBean.dot.r}"/>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
-                                     value="1" name="r" process="@this" />
+                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                                     action="#{dotsBean.dot.setR(1)}"
+                                     value="1" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                                     action="#{dotsBean.dot.setR(1.5)}"
                                      value="1.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                                     action="#{dotsBean.dot.setR(2)}"
                                      value="2" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                                     action="#{dotsBean.dot.setR(2.5)}"
                                      value="2.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="button" class="button-input" actionListener="#{dotsBean.toggleR}"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                                     action="#{dotsBean.dot.setR(3)}"
                                      value="3" name="r"/>
                 </div>
             </div>
