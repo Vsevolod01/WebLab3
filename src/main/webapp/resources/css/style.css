@@ -34,6 +34,7 @@ form {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .svg-container {

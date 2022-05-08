@@ -27,7 +27,7 @@ public class Dot implements Serializable {
     private double y;
 
     @Column(name = "R")
-    private double r;
+    private double r = 1;
 
     @Column(name = "RESULT")
     private boolean result;

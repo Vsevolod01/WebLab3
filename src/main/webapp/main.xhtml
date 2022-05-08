@@ -28,13 +28,13 @@
         <h:inputHidden type="hidden" id="isFromGraphic"/>
         <h:commandButton styleClass="submitSvg" action="#{dotsBean.addDot}">
             <f:ajax execute="hiddenForm" render="valuesTable"
-                    onevent="myFunc" />
+                    onevent="myFunc"/>
         </h:commandButton>
     </h:form>
     <h:form id="newEntryForm">
         <div class="selectors">
             <div class="selector">
-                <label class="selector-description">Choose X value:</label>
+                <label class="selector-description">Выбор X:</label>
                 <p:inputText id="x-label" value="#{dotsBean.dot.x}" style="display: none"/>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="selector">
-                <div class="selector-description">Choose Y value:</div>
+                <div class="selector-description">Выбор Y:</div>
                 <p:inputText value="#{dotsBean.dot.y}"
                              id="Y_field"
                              class="text-input"
@@ -92,41 +92,41 @@
                              placeholder="[-5; 5]"/>
             </div>
             <div class="selector">
-                <label class="selector-description">Choose R value:</label>
+                <label class="selector-description">Выбор R:</label>
                 <p:inputText id="r-label" value="#{dotsBean.dot.r}" style="display: none"/>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
-                                     action="#{dotsBean.dot.setR(1)}"
+                                     action="#{dotsBean.dot.setR(1)}" onclick="drawDotsFromTable()"
                                      value="1" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
-                                     action="#{dotsBean.dot.setR(1.5)}"
+                                     action="#{dotsBean.dot.setR(1.5)}" onclick="drawDotsFromTable()"
                                      value="1.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
-                                     action="#{dotsBean.dot.setR(2)}"
+                                     action="#{dotsBean.dot.setR(2)}" onclick="drawDotsFromTable()"
                                      value="2" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
-                                     action="#{dotsBean.dot.setR(2.5)}"
+                                     action="#{dotsBean.dot.setR(2.5)}" onclick="drawDotsFromTable()"
                                      value="2.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
                     <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
-                                     action="#{dotsBean.dot.setR(3)}"
+                                     action="#{dotsBean.dot.setR(3)}" onclick="drawDotsFromTable()"
                                      value="3" name="r"/>
                 </div>
             </div>
+            <!--            <div class="selector">-->
             <h:commandButton id="submit-button"
                              class="submit"
                              disabled="false"
                              type="submit"
                              action="#{dotsBean.addDot}"
                              value="Отправить">
-<!--                             onclick="drawDotsFromTable()">-->
                 <f:ajax execute="newEntryForm" render="valuesTable" onevent="myFunc"/>
             </h:commandButton>
             <h:commandButton id="clear-button"
@@ -140,6 +140,7 @@
             </h:commandButton>
             <h:button class="submit" outcome="index" value="Посмотреть на часы"/>
         </div>
+        <!--        </div>-->
         <div class="svg-container">
             <ui:include src="templates/graph.html"/>
         </div>

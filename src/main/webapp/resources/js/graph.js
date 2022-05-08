@@ -4,12 +4,12 @@ const DEFAULT_R_VALUE = 1;
 
 // Функции для вычисления Y и X
 
-function fromTableToSvgX(x) {
-    return x / getRValue() * CANVAS_R_VALUE + SVG_SIZE / 2;
+function fromTableToSvgX(x, r) {
+    return x / r * CANVAS_R_VALUE + SVG_SIZE / 2;
 }
 
-function fromTableToSvgY(y) {
-    return SVG_SIZE / 2 - y / getRValue() * CANVAS_R_VALUE;
+function fromTableToSvgY(y, r) {
+    return SVG_SIZE / 2 - y / r * CANVAS_R_VALUE;
 }
 
 function fromSvgToRX(x) {
@@ -29,18 +29,21 @@ function drawDotsFromTable() {
 
         let x = parseFloat(point.find("td:first-child").text());
         let y = parseFloat(point.find("td:nth-child(2)").text());
-
+        let r = parseFloat(point.find("td:nth-child(3)").text());
         if (isNaN(x) || isNaN(y)) return;
 
         let color = checkResult(x, y, getRValue()) ? 'green' : 'red';
-
+        if (r !== getRValue()) {
+            color = 'indigo';
+        }
+        console.log(getRValue())
         let plot = $(".svg-container svg");
 
         let existingContent = plot.html();
         let contentToInsert = `<circle class="dot" 
                                          r="4" 
-                                         cx="${fromTableToSvgX(x)}" 
-                                         cy="${fromTableToSvgY(y)}" 
+                                         cx="${fromTableToSvgX(x, r)}" 
+                                         cy="${fromTableToSvgY(y, r)}" 
                                          fill="${color}"/>`;
         plot.html(existingContent + contentToInsert);
     })
