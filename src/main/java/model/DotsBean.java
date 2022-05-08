@@ -16,6 +16,7 @@ import javax.transaction.UserTransaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -45,15 +46,22 @@ public class DotsBean {
         session.close();
     }
 
+    public boolean isRValid(Dot dot) {
+        List<Double> rArray = Arrays.asList(1.0, 1.5, 2.0, 2.5, 3.0);
+        return rArray.contains(dot.getR());
+    }
+
     public void addDot() {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-            dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
-            dot.setResult(AreaResult.isItInArea(dot));
-            transaction.begin();
-            em.persist(dot);
-            transaction.commit();
-            dots.add(dot);
+            if (isRValid(dot)) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+                dot.setDate(dateFormat.format(new Date(System.currentTimeMillis())));
+                dot.setResult(AreaResult.isItInArea(dot));
+                transaction.begin();
+                em.persist(dot);
+                transaction.commit();
+                dots.add(dot);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             try {
