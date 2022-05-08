@@ -37,6 +37,12 @@ form {
     overflow: hidden;
 }
 
+.y-selector {
+    display: flex;
+    flex-flow: column;
+    justify-content: right;
+}
+
 .svg-container {
     width: 100%;
     display: flex;

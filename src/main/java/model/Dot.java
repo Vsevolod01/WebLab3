@@ -2,15 +2,18 @@ package model;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.persistence.*;
 import java.io.Serializable;
 
 //TODO: check with lombok getter/setters
-//import lombok.*;
-//
-//@Getter
-//@Setter
-//@NoArgsConstructor
+import lombok.*;
+
+@Getter
+@Setter
 @Entity
 @Table(name="DOT_TABLE")
 public class Dot implements Serializable {
@@ -36,6 +39,7 @@ public class Dot implements Serializable {
     private String date;
 
     public Dot() {
+        r = 1;
     }
 
     public Dot(double x, double y, double r, boolean result, String date) {
@@ -46,48 +50,8 @@ public class Dot implements Serializable {
         this.date = date;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
-    public boolean isResult() {
-        return result;
-    }
-
     public void setResult(boolean result) {
         this.result = result;
-    }
-
-    public String getDate() {
-        return date;
     }
 
     public void setDate(String date) {

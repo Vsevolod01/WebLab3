@@ -9,10 +9,16 @@ import views.AreaResult;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.persistence.*;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import javax.xml.bind.ValidationException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,8 +36,6 @@ public class DotsBean {
     @PersistenceContext(unitName = "hibernate")
     EntityManager em;
 
-
-    //TODO - надо убрать
     static SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 
@@ -55,7 +59,6 @@ public class DotsBean {
             em.persist(dot);
             transaction.commit();
             dots.add(dot);
-            System.out.println("addDot()");
         } catch (Exception e) {
             e.printStackTrace();
             try {

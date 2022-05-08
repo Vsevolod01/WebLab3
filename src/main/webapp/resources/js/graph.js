@@ -30,9 +30,10 @@ function drawDotsFromTable() {
         let x = parseFloat(point.find("td:first-child").text());
         let y = parseFloat(point.find("td:nth-child(2)").text());
         let r = parseFloat(point.find("td:nth-child(3)").text());
+        let result = point.find("td:nth-child(4)").text()
         if (isNaN(x) || isNaN(y)) return;
 
-        let color = checkResult(x, y, getRValue()) ? 'green' : 'red';
+        let color = (result == "true")? 'green' : 'red';
         if (r !== getRValue()) {
             color = 'indigo';
         }
@@ -58,20 +59,6 @@ function clearPlot() {
     $(".dot").remove();
 }
 
-function drawDot() {
-    let x = $('.pointX').val();
-    let y = $('.pointY').val();
-    let color = checkResult(x, y, getRValue()) ? 'green' : 'red';
-
-    let plot = $(".svg-container svg");
-    let existingContent = plot.html();
-    let contentToInsert = `<circle class="dot" 
-                                         r="4" 
-                                         cx="${fromTableToSvgX(x)}" 
-                                         cy="${fromTableToSvgY(y)}" 
-                                         fill="${color}"/>`;
-    plot.html(existingContent + contentToInsert);
-}
 
 // Нажатие на график и отправка формы
 function clickPlotHandler(e) {
