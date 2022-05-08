@@ -13,6 +13,8 @@ public class Yvalidator implements Validator {
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
 
         try {
+            String inputString = (String)o;
+            System.out.println(inputString);
             double input = (Double) o;
             try {
                 if (input >= 5. || input <= -3.) {

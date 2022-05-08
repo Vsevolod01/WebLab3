@@ -14,19 +14,22 @@ body {
     /*! width: 40px; */
     /*border: 1px solid black;*/
     border-radius: 6px;
-    background-color: lightyellow;
+    background-color: white;
     margin: 5px;
     display: inline-block;
     text-decoration: none;
     color: black
 }
 
+.submit {
+
+}
+
 .button-input:hover, .submit:hover {
-    color: white;
-    transition: 0.5s;
+    transition: 0.1s;
     /*! border: 1px solid gray; */
-    background-color: forestgreen;
-    margin: 1px;
+    background-color: lightgrey;
+
     display: inline-block;
 }
 
@@ -35,8 +38,8 @@ body {
     /*     color: white; */
     border-radius: 6px;
     /*     background-color: green; */
-    margin: 1px;
     display: inline-block;
+    margin: 5px;
 }
 
 .red {

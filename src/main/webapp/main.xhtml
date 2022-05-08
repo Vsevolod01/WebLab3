@@ -42,7 +42,7 @@
                                      value="-5" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" Validationclass="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
                                      action="#{dotsBean.dot.setX(-4)}"
                                      value="-4" name="x"/>
                 </div>
@@ -85,15 +85,16 @@
             <div class="selector">
                 <div class="selector-description">Choose Y value:</div>
                 <div class="y-selector">
-                    <h:inputText value="#{dotsBean.dot.y}"
+                    <p:inputText value="#{dotsBean.dot.y}"
                                  id="Y_field"
+                                 required="true"
+                                 requiredMessage="Choose Y value"
                                  class="text-input"
                                  name="y"
-                                 maxlength="14"
                                  placeholder="(-3; 5)">
                         <f:validator validatorId="y_validator"/>
-                    </h:inputText>
-                    <h:message id="y_error_message" for="Y_field" showSummary="true" showDetail="false" style="color: darkred"/>
+                    </p:inputText>
+                    <p:message id="y_error_message" for="Y_field" showSummary="true" showDetail="false" style="color: darkred"/>
                 </div>
             </div>
             <div class="selector">
@@ -131,7 +132,6 @@
                              type="submit"
                              action="#{dotsBean.addDot}"
                              value="Отправить">
-                <!--                             onclick="drawDotsFromTable()">-->
                 <f:ajax execute="newEntryForm" render="valuesTable y_error_message" onevent="myFunc"/>
             </h:commandButton>
             <h:commandButton id="clear-button"
@@ -141,7 +141,7 @@
                              action="#{dotsBean.clearTable()}"
                              value="Очистить таблицу"
                              onclick="clearTable(); clearPlot()">
-                <f:ajax execute="newEntryForm" render="valuesTable"/>
+                <f:ajax execute="@this" render="valuesTable"/>
             </h:commandButton>
             <h:button class="submit" outcome="index" value="Посмотреть на часы"/>
         </div>
