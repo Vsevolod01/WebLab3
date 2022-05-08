@@ -9,16 +9,10 @@ import views.AreaResult;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.persistence.*;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-import javax.xml.bind.ValidationException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +35,7 @@ public class DotsBean {
 
     private Dot dot = new Dot();
     private List<Dot> dots;
+    private String y;
 
     @PostConstruct
     public void init() {
@@ -100,4 +95,12 @@ public class DotsBean {
         this.dots = dots;
     }
 
+    public String getY() {
+        return y;
+    }
+
+    public void setY(String y) {
+        this.y = y;
+        dot.setY(Double.parseDouble(y));
+    }
 }

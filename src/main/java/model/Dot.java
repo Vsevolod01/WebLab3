@@ -1,11 +1,5 @@
 package model;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 import javax.persistence.*;
 import java.io.Serializable;
 

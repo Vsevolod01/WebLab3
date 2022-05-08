@@ -11,11 +11,14 @@ import javax.faces.validator.ValidatorException;
 public class Yvalidator implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-
+        String inputString = (String) o;
+        if (inputString.length() > 14) {
+            FacesMessage message = new FacesMessage("Input is too long!");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(message);
+        }
         try {
-            String inputString = (String)o;
-            System.out.println(inputString);
-            double input = (Double) o;
+            double input = Double.parseDouble(inputString);
             try {
                 if (input >= 5. || input <= -3.) {
                     FacesMessage message = new FacesMessage("Incorrect Y value");
@@ -27,8 +30,10 @@ public class Yvalidator implements Validator {
                 message.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(message);
             }
-        } catch (ClassCastException e) {
-            e.printStackTrace();
+        } catch (ClassCastException | NumberFormatException e) {
+            FacesMessage message = new FacesMessage("Invalid Y value");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(message);
         }
     }
 
