@@ -34,50 +34,52 @@
     <h:form id="newEntryForm">
         <div class="selectors">
             <div class="selector">
-                <label class="selector-description">Выбор X:</label>
+                <label class="selector-description">Выбор X:
+                    <h:outputLabel id="x-output-label" value="#{dotsBean.dot.x}"/>
+                </label>
                 <p:inputText id="x-label" value="#{dotsBean.dot.x}" style="display: none"/>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(-5)}"
                                      value="-5" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(-4)}"
                                      value="-4" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(-3)}"
                                      value="-3" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(-2)}"
                                      value="-2" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(-1)}"
                                      value="-1" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(0)}"
                                      value="0" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label x-output-label"
                                      action="#{dotsBean.dot.setX(1)}"
                                      value="1" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label"
                                      action="#{dotsBean.dot.setX(2)}"
                                      value="2" name="x"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="x-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="x-label"
                                      action="#{dotsBean.dot.setX(3)}"
                                      value="3" name="x"/>
                 </div>
@@ -94,34 +96,37 @@
                                  placeholder="(-3; 5)">
                         <f:validator validatorId="y_validator"/>
                     </p:inputText>
-                    <p:message id="y_error_message" for="Y_field" showSummary="true" showDetail="false" style="color: darkred"/>
+                    <p:message id="y_error_message" for="Y_field" showSummary="true" showDetail="false"
+                               style="color: darkred"/>
                 </div>
             </div>
             <div class="selector">
-                <label class="selector-description">Выбор R:</label>
+                <label class="selector-description">Выбор R:
+                    <h:outputLabel id="r-output-label" value="#{dotsBean.dot.r}"/>
+                </label>
                 <p:inputText id="r-label" value="#{dotsBean.dot.r}" style="display: none"/>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="r-label r-output-label"
                                      action="#{dotsBean.dot.setR(1)}" onclick="drawDotsFromTable()"
                                      value="1" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="r-label r-output-label"
                                      action="#{dotsBean.dot.setR(1.5)}" onclick="drawDotsFromTable()"
                                      value="1.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="r-label r-output-label"
                                      action="#{dotsBean.dot.setR(2)}" onclick="drawDotsFromTable()"
                                      value="2" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="r-label r-output-label"
                                      action="#{dotsBean.dot.setR(2.5)}" onclick="drawDotsFromTable()"
                                      value="2.5" name="r"/>
                 </div>
                 <div class="checkbox-with-label">
-                    <p:commandButton type="submit" class="button-input" process="@form" update="r-label"
+                    <p:commandButton type="submit" class="button-input" process="@this" update="r-label r-output-label"
                                      action="#{dotsBean.dot.setR(3)}" onclick="drawDotsFromTable()"
                                      value="3" name="r"/>
                 </div>

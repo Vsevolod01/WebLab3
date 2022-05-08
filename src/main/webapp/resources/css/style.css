@@ -12,7 +12,7 @@ form {
 }
 
 .selectors {
-    width: 100%;
+    width: 65%;
 }
 
 .selectors > * {
@@ -44,7 +44,7 @@ form {
 }
 
 .svg-container {
-    width: 100%;
+    width: 35%;
     display: flex;
     flex-flow: column;
     align-items: center;
